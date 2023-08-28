@@ -13,8 +13,14 @@ import (
 )
 
 func write(file string) error {
-	cmd := exec.Command("PowerShell", "-Command", "Add-Type", "-AssemblyName",
-		fmt.Sprintf("System.Windows.Forms;[Windows.Forms.Clipboard]::SetImage([System.Drawing.Image.ImageFormat.Jpeg]::FromFile('%s'));", file))
+	cmd := exec.Command("powershell", "-Command",
+		fmt.Sprintf(`$Image = [System.Drawing.Image]::FromFile("%s")
+							$Stream = New-Object System.IO.MemoryStream
+							$Image.Save($Stream, [System.Drawing.Imaging.ImageFormat]::Jpeg)
+							$Clipboard = [System.Windows.Forms.Clipboard]
+							$Clipboard::SetData("Preferred DropEffect", "Copy")
+							$Clipboard::SetData("JPEG", $Stream.ToArray())
+							$Stream.Close()`, file))
 	b, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("%s: %s", err, string(b))

@@ -14,7 +14,7 @@ import (
 
 func write(file string) error {
 	cmd := exec.Command("PowerShell", "-Command", "Add-Type", "-AssemblyName",
-		fmt.Sprintf("System.Windows.Forms;[Windows.Forms.Clipboard]::SetImage([System.Drawing.Image]::FromFile('%s'));", file))
+		fmt.Sprintf("System.Windows.Forms;[Windows.Forms.Clipboard]::SetImage([System.Drawing.Image.ImageFormat.Jpeg]::FromFile('%s'));", file))
 	b, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("%s: %s", err, string(b))

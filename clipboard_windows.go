@@ -13,7 +13,7 @@ import (
 )
 
 func write(file string) error {
-	cmd := exec.Command("powershell", "-Command",
+	cmd := exec.Command("PowerShell", "-Command",
 		fmt.Sprintf(`$Image = [System.Drawing.Image]::FromFile("%s")
 							$Stream = New-Object System.IO.MemoryStream
 							$Image.Save($Stream, [System.Drawing.Imaging.ImageFormat]::Jpeg)

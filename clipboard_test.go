@@ -1,4 +1,4 @@
-package clipboard
+package clip_img
 
 import (
 	"io/ioutil"

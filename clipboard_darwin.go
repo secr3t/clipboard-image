@@ -1,12 +1,12 @@
+//go:build darwin
 // +build darwin
 
-package clipboard
+package clip_img
 
 import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 )
@@ -22,7 +22,7 @@ func write(file string) error {
 }
 
 func read() (io.Reader, error) {
-	f, err := ioutil.TempFile("", "")
+	f, err := os.CreateTemp("", "")
 	if err != nil {
 		return nil, err
 	}

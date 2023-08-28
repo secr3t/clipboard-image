@@ -1,8 +1,7 @@
-package clipboard
+package clip_img
 
 import (
 	"io"
-	"io/ioutil"
 	"os"
 )
 
@@ -22,7 +21,7 @@ func Read() (io.Reader, error) {
 }
 
 func writeTemp(r io.Reader) (string, error) {
-	f, err := ioutil.TempFile("", "")
+	f, err := os.CreateTemp("", "*.jpg")
 	if err != nil {
 		return "", err
 	}

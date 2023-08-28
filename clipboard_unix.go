@@ -1,6 +1,7 @@
+//go:build freebsd || linux || netbsd || openbsd || solaris || dragonfly
 // +build freebsd linux netbsd openbsd solaris dragonfly
 
-package clipboard
+package clip_img
 
 import (
 	"bytes"
